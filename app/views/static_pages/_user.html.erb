@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col-md-3">
+        <%= form_for (@website) do |f| %>
+        <%= f.label :url, "Domain" %>
+        <%= f.text_field :url, class: "form-control" %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.submit "OK", class: 'btn btn-primary' %>
+        <% end %>
+        <% @urls.any? %>
+        <% @urls.each do |url| %>
+        <h3><%= link_to url.url, url , :remote => true %></h3>
+        <%= link_to "Delete", website_path(url.id),
+                     data: { confirm: "Are you sure?" },
+                     method: :delete %><br>
+        <% end %>
+    </div>
+    <div class='col-md-9' id="graph"></div>
+</div>

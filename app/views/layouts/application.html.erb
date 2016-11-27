@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AlexaKeeper</title>
+        <%= csrf_meta_tags %>
+
+        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    </head>
+
+    <body>
+        <header class="navbar navbar-fixed-top navbar-inverse">
+            <div class="container">
+                <%= link_to "Alexa Ranking", root_path, id: 'logo', class:'load' %>
+                <% if user_signed_in? %>
+                <nav>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><%= link_to current_user.name, root_path, class:'load' %></li>
+                        <li><%= link_to 'Profile', edit_user_registration_path %></li>
+                        <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+                    </ul>
+                </nav>
+            <% else %>
+                <nav>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><%= link_to 'Log In', new_user_session_path %></li>
+                        <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+                    </ul>
+                </nav>
+                <% end %>
+            </div>
+        </header>
+        <div class="container">
+            <p class="notice"><%= notice %></p>
+            <p class="alert"><%= alert %></p>
+            <%= yield %>
+        </div>
+        <footer class="footer">
+            <small>
+                A project
+                by
+                <a href="https://redpanthers.co/">redpanthers</a> team.
+            </small>
+        </footer>
+    </body>
+</html>
