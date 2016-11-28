@@ -16,6 +16,13 @@ class CollectionsController < ApplicationController
   def show
  
   end
+
+  def destroy
+    Collection.destroy(params[:id])
+    Website.where(:collection_id => params[:id]).destroy_all
+    redirect_to root_url
+  end
+
   
   private
     def collection_params
